@@ -54,7 +54,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
     st.session_state.messages.append({
         "role": "assistant",
-        "content": "Chào bạn! Tôi là Trợ lý AI chuyên gia tư vấn. Bạn đang gặp khó khăn gì trong cuộc việc, cuộc sống hay cần giải đáp thắc mắc gì? Cứ chia sẻ nhé, tôi sẽ tư vấn giúp bạn!"
+        "content": "Chào bạn! Tôi là Trợ lý AI Chuyên gia Tư vấn. Tôi được trang bị kho kiến thức khổng lồ về **Kỹ năng sống, Khởi nghiệp, Quản trị - Lãnh đạo, và Tư duy giải quyết vấn đề**.\n\nBạn đang gặp vướng mắc gì trong công việc, cuộc sống hay tình cảm? Cứ chia sẻ chi tiết nhé, tôi sẽ gỡ rối giúp bạn!"
     })
 
 for message in st.session_state.messages:
