@@ -18,13 +18,13 @@ if not os.path.exists("./chroma_db") and os.path.exists("lethamduong_data.zip"):
 
 # --- 1. CAU HINH TRANG ---
 st.set_page_config(
-    page_title="Trợ lý AI Lê Thẩm Dương",
+    page_title="Trợ lý AI Tư Vấn",
     page_icon="😎",
     layout="wide"
 )
 
-st.title("😎 Trợ lý AI: TS. Lê Thẩm Dương")
-st.markdown("*Được đào tạo từ hơn 1.100 bài giảng thực tế!*")
+st.title("😎 Trợ lý AI: Chuyên Gia Tư Vấn & Giải Đáp")
+st.markdown("*Được đào tạo từ hệ thống dữ liệu thực tế chuyên sâu!*")
 
 # --- 2. KHOI TAO BO NHO & AI (Cache de khong load lai moi lan) ---
 @st.cache_resource
@@ -54,7 +54,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
     st.session_state.messages.append({
         "role": "assistant",
-        "content": "Chào bạn! Tôi là phiên bản AI của thầy Lê Thẩm Dương. Bạn đang gặp khó khăn gì trong cuộc sống, khởi nghiệp hay tình yêu? Cứ nói ra, tôi sẽ tư vấn giúp bạn!"
+        "content": "Chào bạn! Tôi là Trợ lý AI chuyên gia tư vấn. Bạn đang gặp khó khăn gì trong cuộc việc, cuộc sống hay cần giải đáp thắc mắc gì? Cứ chia sẻ nhé, tôi sẽ tư vấn giúp bạn!"
     })
 
 for message in st.session_state.messages:
@@ -93,9 +93,9 @@ if prompt:
         
         full_context = "\n\n---\n\n".join(context_parts)
 
-    with st.spinner("Thầy đang trả lời..."):
+    with st.spinner("Đang suy nghĩ..."):
         system_prompt = f"""
-Bạn là phiên bản AI của Tiến sĩ Lê Thẩm Dương - chuyên gia kinh tế, diễn giả nổi tiếng hàng đầu Việt Nam.
+Bạn là một Chuyên gia tư vấn và giải đáp thắc mắc xuất sắc.
 
 PHONG CÁCH CỦA BẠN:
 - Lịch sự, tôn trọng người hỏi (xưng "tôi" và gọi "bạn" hoặc "các anh chị")
@@ -104,16 +104,16 @@ PHONG CÁCH CỦA BẠN:
 - Hài hước, thông minh nhưng vẫn giữ được sự chừng mực và tri thức
 
 NHIỆM VỤ:
-Trả lời câu hỏi của học viên dựa trên các đoạn bài giảng THỰC TẾ dưới đây.
-Nếu học viên yêu cầu liệt kê hoặc hỏi kiến thức cụ thể mà trong Context KHÔNG CÓ ĐỦ (ví dụ: đòi liệt kê đủ 31 kỹ năng), bạn ĐƯỢC PHÉP sử dụng kiến thức chung của bạn (World Knowledge) để trả lời đầy đủ và chi tiết cho học viên, NHƯNG VẪN PHẢI GIỮ nguyên phong cách xéo xắt của Lê Thẩm Dương. 
-TUYỆT ĐỐI KHÔNG được chửi mắng rồi từ chối trả lời nếu bạn thực sự biết câu trả lời (kể cả khi phải dùng kiến thức ngoài)!
-Trả lời bằng tiếng Việt, tự nhiên, không cứng nhắc.
+Trả lời câu hỏi của người dùng một cách chính xác và thấu đáo dựa trên các DỮ LIỆU THAM KHẢO dưới đây. 
+Nếu dữ liệu tham khảo KHÔNG CÓ ĐỦ thông tin, bạn ĐƯỢC PHÉP sử dụng kiến thức chuyên môn rộng lớn của bạn để bổ sung và tư vấn một cách trọn vẹn nhất. 
+TUYỆT ĐỐI KHÔNG được từ chối trả lời nếu bạn có khả năng đưa ra lời khuyên hữu ích.
+Trả lời bằng tiếng Việt, tự nhiên, rành mạch và dễ hiểu.
 
 LƯU Ý QUAN TRỌNG VỀ CHÍNH TẢ:
-Dữ liệu bài giảng (CONTEXT) được lấy từ phụ đề tự động của Youtube nên có rất nhiều lỗi chính tả, nhận diện sai từ, lủng củng và ngắt câu sai (ví dụ: "thà" thay vì "thành", "đ" thay vì "đó", lặp từ "mày mày"...). 
-Khi bạn trích dẫn hoặc diễn đạt lại, BẮT BUỘC PHẢI tự động sửa mượt lại toàn bộ lỗi chính tả, hành văn cho chuẩn xác. TUYỆT ĐỐI KHÔNG BÊ NGUYÊN XI CÁC LỖI CHÍNH TẢ VÀO CÂU TRẢ LỜI CỦA BẠN.
+Dữ liệu tham khảo được trích xuất tự động nên có thể có lỗi chính tả hoặc ngắt câu lủng củng.
+Khi bạn trích dẫn hoặc diễn đạt lại, BẮT BUỘC PHẢI tự động sửa mượt lại toàn bộ văn phong cho chuẩn xác.
 
-DỮ LIỆU BÀI GIẢNG THỰC TẾ (CONTEXT):
+DỮ LIỆU THAM KHẢO (CONTEXT):
 {full_context}
 
 CÂU HỎI:
@@ -130,9 +130,6 @@ CÂU HỎI:
                 )
             )
             reply = response.text
-            
-            sources_text = "\n".join(sources)
-            reply += f"\n\n---\n*📚 Tổng hợp từ bài giảng:*\n{sources_text}"
             
             st.chat_message("assistant").markdown(reply)
             st.session_state.messages.append({"role": "assistant", "content": reply})
