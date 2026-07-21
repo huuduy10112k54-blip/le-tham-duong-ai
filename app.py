@@ -44,7 +44,8 @@ def load_resources():
 try:
     with st.spinner("Đang khởi động bộ não AI (Lần đầu mất 5-10s)..."):
         ai_client, embedding_model, collection = load_resources()
-    st.success(f"✅ Sẵn sàng! Kho tri thức: {collection.count():,} đoạn bài giảng.")
+    st.success(f"✅ Sẵn sàng! Kho tri thức: {collection.count():,} đoạn bài giảng (Nguồn: TS. Lê Thẩm Dương).")
+    st.markdown("<p style='font-size: 0.75rem; color: #888888; text-align: right; margin-top: -10px;'>Dữ liệu tham khảo: <a href='https://www.youtube.com/@lethamduongeduvn' target='_blank' style='color: #888888; text-decoration: none;'>YouTube @lethamduongeduvn</a></p>", unsafe_allow_html=True)
 except Exception as e:
     st.error(f"❌ Chưa tìm thấy Vector Database. Hãy chạy `python build_vector_db.py` trước! Lỗi: {e}")
     st.stop()
